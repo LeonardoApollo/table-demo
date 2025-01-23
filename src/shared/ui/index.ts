@@ -1,3 +1,4 @@
-import { Portal } from './Portal';
 import { Input } from './Input';
-export {Portal, Input}
+import { Portal } from './Portal';
+
+export { Portal, Input };

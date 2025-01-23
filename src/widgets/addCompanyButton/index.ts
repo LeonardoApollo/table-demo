@@ -1,1 +1,1 @@
-export {AddCompanyButton} from './ui/AddCompanyButton'
+export { AddCompanyButton } from './ui/AddCompanyButton';

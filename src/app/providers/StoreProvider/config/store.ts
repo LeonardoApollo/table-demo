@@ -1,20 +1,17 @@
-import {
-    configureStore,
-} from '@reduxjs/toolkit';
-import { StateSchema } from './StateSchema';
 import { tableReducer } from '@entities/table';
+import { configureStore } from '@reduxjs/toolkit';
 
-export function createReduxStore(
-    initialState?: StateSchema,
-) {
-    const store = configureStore({
-        reducer: {
-            table: tableReducer
-        },
-        preloadedState: initialState,
-    });
+import { StateSchema } from './StateSchema';
 
-    return store;
+export function createReduxStore(initialState?: StateSchema) {
+  const store = configureStore({
+    reducer: {
+      table: tableReducer,
+    },
+    preloadedState: initialState,
+  });
+
+  return store;
 }
 
 export type AppDispatch = ReturnType<typeof createReduxStore>['dispatch'];

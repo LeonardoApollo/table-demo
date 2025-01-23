@@ -4,7 +4,8 @@
   "main": "index.js",
   "license": "MIT",
   "scripts": {
-    "start": "vite"
+    "start": "vite",
+    "prettier": "npx prettier --write \"**/*.{ts,tsx}\""
   },
   "lint-staged": {
     "**/*.{ts,tsx}": [

@@ -1,46 +1,48 @@
 import React, { ReactNode, Suspense } from 'react';
+
 import cls from './ErrorBoundary.module.scss';
+
 interface ErrorBoundaryProps {
-    children: ReactNode;
+  children: ReactNode;
 }
 
 interface ErrorBoundaryState {
-    hasError: boolean;
+  hasError: boolean;
 }
 
 class ErrorBoundary extends React.Component<
-    ErrorBoundaryProps,
-    ErrorBoundaryState
+  ErrorBoundaryProps,
+  ErrorBoundaryState
 > {
-    constructor(props: ErrorBoundaryProps) {
-        super(props);
-        this.state = { hasError: false };
+  constructor(props: ErrorBoundaryProps) {
+    super(props);
+    this.state = { hasError: false };
+  }
+
+  static getDerivedStateFromError() {
+    return { hasError: true };
+  }
+
+  reloadPage() {
+    location.reload();
+  }
+
+  render() {
+    const { hasError } = this.state;
+    const { children } = this.props;
+    if (hasError) {
+      return (
+        <Suspense fallback="">
+          <div className={cls.ErrorPage}>
+            <p>Произошла непредвиденная ошибка</p>
+            <button onClick={this.reloadPage}>Обновить страницу</button>
+          </div>
+        </Suspense>
+      );
     }
 
-    static getDerivedStateFromError() {
-        return { hasError: true };
-    }
-
-    reloadPage() {
-        location.reload();
-    }
-
-    render() {
-        const { hasError } = this.state;
-        const { children } = this.props;
-        if (hasError) {
-            return (
-                <Suspense fallback="">
-                    <div className={cls.ErrorPage}>
-                        <p>Произошла непредвиденная ошибка</p>
-                        <button onClick={this.reloadPage}>Обновить страницу</button>
-                    </div>
-                </Suspense>
-            );
-        }
-
-        return children;
-    }
+    return children;
+  }
 }
 
 export default ErrorBoundary;

@@ -1,14 +1,14 @@
 interface Row {
-    id: string,
-    selected: boolean,
-    company: string,
-    address: string
+  id: string;
+  selected: boolean;
+  company: string;
+  address: string;
 }
 
 interface TableSchema {
-    columns: string[];
-    rows: Row[];
-    selectedRows: string[];
+  columns: string[];
+  rows: Row[];
+  selectedRows: string[];
 }
 
-export type {TableSchema, Row}
+export type { TableSchema, Row };
