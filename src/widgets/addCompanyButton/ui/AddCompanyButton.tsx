@@ -1,4 +1,4 @@
-import { Row } from '@entities/table';
+import { Row } from '@entities/Table';
 import { Input, Portal } from '@shared/ui';
 import React, {
   ChangeEvent,

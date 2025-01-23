@@ -7,6 +7,20 @@ const initialState: TableSchema = {
   columns: ['', 'Название компании', 'Адрес'],
   rows: [],
   selectedRows: [],
+  allSelected: false,
+};
+
+const updateRow = (
+  rows: Row[],
+  id: string,
+  updatedFields: Partial<Row>,
+): Row[] => {
+  return rows.map((row) => {
+    if (row.id === id) {
+      return { ...row, ...updatedFields };
+    }
+    return row;
+  });
 };
 
 export const tableSlice = buildSlice({
@@ -21,6 +35,7 @@ export const tableSlice = buildSlice({
         const idsToDelete = new Set(payload);
         state.rows = state.rows.filter((row) => !idsToDelete.has(row.id));
         state.selectedRows = [];
+        state.allSelected = false;
       }
     },
     selectRow: (state, { payload }: PayloadAction<string>) => {
@@ -32,16 +47,34 @@ export const tableSlice = buildSlice({
           : (state.selectedRows = state.selectedRows.filter(
               (id) => id !== row.id,
             ));
+        state.selectedRows.length === state.rows.length
+          ? (state.allSelected = true)
+          : (state.allSelected = false);
       }
     },
     selectAllRows: (state) => {
-      console.log(state);
+      const allSelected = !state.allSelected;
+      state.rows.forEach((row) => {
+        row.selected = allSelected;
+      });
+      state.selectedRows = allSelected ? state.rows.map((row) => row.id) : [];
+      state.allSelected = allSelected;
     },
-    changeCompany: (state, { payload }: PayloadAction<string>) => {
-      console.log(payload);
+    changeCompany: (
+      state,
+      { payload }: PayloadAction<{ id: string; value: string }>,
+    ) => {
+      state.rows = updateRow(state.rows, payload.id, {
+        company: payload.value,
+      });
     },
-    changeAddress: (state, { payload }: PayloadAction<string>) => {
-      console.log(payload);
+    changeAddress: (
+      state,
+      { payload }: PayloadAction<{ id: string; value: string }>,
+    ) => {
+      state.rows = updateRow(state.rows, payload.id, {
+        address: payload.value,
+      });
     },
   },
 });

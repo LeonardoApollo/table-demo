@@ -9,6 +9,7 @@ interface TableSchema {
   columns: string[];
   rows: Row[];
   selectedRows: string[];
+  allSelected: boolean;
 }
 
 export type { TableSchema, Row };

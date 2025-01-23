@@ -1,7 +1,7 @@
-import { Row } from '@entities/table';
-import { getSelectedRows } from '@entities/table/model/selectors/getSelectedRows';
-import { tableActions } from '@entities/table/model/slice/tableSlice';
-import { Table } from '@entities/table/ui';
+import { Row } from '@entities/Table';
+import { getSelectedRows } from '@entities/Table/model/selectors/getSelectedRows';
+import { tableActions } from '@entities/Table/model/slice/tableSlice';
+import { Table } from '@entities/Table/ui';
 import { useAppDispatch } from '@shared/hooks/useAppDispatch';
 import { AddCompanyButton } from '@widgets/addCompanyButton';
 import { memo, useCallback } from 'react';
@@ -11,20 +11,24 @@ const App = memo(() => {
   const dispatch = useAppDispatch();
   const selectedRows = useSelector(getSelectedRows);
 
-  const handleDeleteCompany = useCallback(() => {
+  const handleDeleteCompany = () =>
     dispatch(tableActions.deleteRows(selectedRows));
-  }, [selectedRows]);
 
   const handleAddCompany = useCallback((company: Row) => {
     dispatch(tableActions.addRow(company));
+  }, []);
+
+  const handleSelectAll = useCallback(() => {
+    dispatch(tableActions.selectAllRows());
   }, []);
 
   return (
     <>
       <div>Таблица Компаний</div>
       <div>
+        <button onClick={handleSelectAll}>Выбрать все</button>
         <AddCompanyButton onAddCompany={handleAddCompany} />
-        <button onClick={handleDeleteCompany}>
+        <button disabled={!selectedRows.length} onClick={handleDeleteCompany}>
           Удалить выбранные компании
         </button>
       </div>

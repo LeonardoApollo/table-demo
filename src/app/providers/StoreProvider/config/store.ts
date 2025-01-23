@@ -1,4 +1,4 @@
-import { tableReducer } from '@entities/table';
+import { tableReducer } from '@entities/Table';
 import { configureStore } from '@reduxjs/toolkit';
 
 import { StateSchema } from './StateSchema';

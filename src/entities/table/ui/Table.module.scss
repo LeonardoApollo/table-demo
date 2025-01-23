@@ -1,0 +1,13 @@
+.Selected {
+    background-color: rgb(21, 148, 221, 0.5);
+}
+
+.Input {
+    background-color: transparent;
+    outline: none;
+    border: none;
+}
+
+.Input:focus {
+    outline: 1px solid black
+}

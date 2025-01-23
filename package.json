@@ -5,7 +5,8 @@
   "license": "MIT",
   "scripts": {
     "start": "vite",
-    "prettier": "npx prettier --write \"**/*.{ts,tsx}\""
+    "prettier": "npx prettier --write \"**/*.{ts,tsx}\"",
+    "prepare": "husky"
   },
   "lint-staged": {
     "**/*.{ts,tsx}": [
@@ -13,7 +14,7 @@
     ]
   },
   "dependencies": {
-    "@reduxjs/toolkit": "^2.5.0", 
+    "@reduxjs/toolkit": "^2.5.0",
     "react": "^19.0.0",
     "react-dom": "^19.0.0",
     "react-redux": "^9.2.0"

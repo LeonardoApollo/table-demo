@@ -1,4 +1,4 @@
-import { TableSchema } from '@entities/table';
+import { TableSchema } from '@entities/Table';
 
 export interface StateSchema {
   table: TableSchema;
