@@ -1,0 +1,26 @@
+{
+    "compilerOptions": {
+        "outDir": "./build/",
+        "noImplicitAny": true,
+        "module": "ESNext",
+        "target": "es5",
+        "jsx": "react-jsx",
+        "allowJs": true,
+        "strict": true,
+        "moduleResolution": "node",
+        "baseUrl": ".",
+        "paths": {
+            "@app/*": ["./src/app/*"],
+            "@entities/*": ["./src/entities/*"],
+            "@features/*": ["./src/features/*"],
+            "@pages/*": ["./src/pages/*"],
+            "@widgets/*": ["./src/widgets/*"],
+            "@shared/*": ["./src/shared/*"]
+        },
+        "esModuleInterop": true,
+        "allowSyntheticDefaultImports": true,
+        "noImplicitThis": true,
+        "isolatedModules": true
+    },
+    "include": ["src/**/*.ts", "src/**/*.tsx"]
+}

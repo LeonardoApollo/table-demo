@@ -1,0 +1,7 @@
+/build
+/node_modules
+.idea
+/storybook-static
+*.log
+/reports/unit
+.env
