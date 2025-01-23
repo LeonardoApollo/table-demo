@@ -39,6 +39,7 @@ const initialState: StateSchema = {
     columns: ['', 'Название комании', 'Адрес'],
     rows: mockRows,
     selectedRows: [],
+    allSelected: false,
   },
 };
 
