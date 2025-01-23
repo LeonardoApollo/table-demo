@@ -4,29 +4,38 @@ import { Row, TableSchema } from '../types/tableSchema';
 const initialState: TableSchema = {
     columns: ['', 'Название компании', 'Адрес'],
     rows: [],
-    selected: [],
+    selectedRows: []
 };
 
 export const tableSlice = buildSlice({
     name: 'table',
     initialState,
     reducers: {
-        add: (state, { payload }: PayloadAction<Row>) => {
-            console.log(payload);
+        addRow: (state, { payload }: PayloadAction<Row>) => {
+            state.rows = [...state.rows, payload]
         },
-        delete: (state, { payload }: PayloadAction<string[]>) => {
-            console.log(payload);
+        deleteRows: (state, { payload }: PayloadAction<string[]>) => {
+            if(payload.length) {
+                
+                const idsToDelete = new Set(payload);
+                state.rows = state.rows.filter(row => !idsToDelete.has(row.id))
+                state.selectedRows = []
+            }
         },
-        select: (state, { payload }: PayloadAction<string>) => {
-            console.log(payload);
+        selectRow: (state, { payload }: PayloadAction<string>) => {
+            const row = state.rows.find(el => el.id === payload);
+            if (row) {
+                row.selected = !row.selected;
+                row.selected ? state.selectedRows = [...state.selectedRows, row.id] : state.selectedRows = state.selectedRows.filter(id => id !== row.id)
+            }  
         },
-        unselect: (state, { payload }: PayloadAction<string>) => {
-            console.log(payload);
-        },
-        selectAll: (state) => {
+        selectAllRows: (state) => {
             console.log(state)
         },
-        change: (state, { payload }: PayloadAction<string>) => {
+        changeCompany: (state, { payload }: PayloadAction<string>) => {
+            console.log(payload);
+        },
+        changeAddress: (state, { payload }: PayloadAction<string>) => {
             console.log(payload);
         },
         

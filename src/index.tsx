@@ -1,7 +1,9 @@
 import { createRoot } from 'react-dom/client';
-import { StoreProvider } from '@app/providers/StoreProvider';
+import { StateSchema, StoreProvider } from '@app/providers/StoreProvider';
 import ErrorBoundary from '@app/providers/ErrorBoundary';
 import App from '@app/App';
+import '@app/styles/index.scss';
+import { Row } from '@entities/table'; 
 const container = document.getElementById('root');
 
 if (!container) {
@@ -10,10 +12,24 @@ if (!container) {
     );
 }
 
+const mockRows: Row[] = [
+    { id: '1', company: 'Company A', address: '123 Main St, City A', selected: false },
+    { id: '2', company: 'Company B', address: '456 Side St, City B', selected: false },
+    { id: '3', company: 'Company C', address: '789 Other St, City C', selected: false },
+]
+
+const initialState: StateSchema = {
+    table: {
+        columns: ['', 'Название комании', 'Адрес'],
+        rows: mockRows,
+        selectedRows: [],
+    }
+}
+
 const root = createRoot(container);
 
 root.render(
-        <StoreProvider>
+        <StoreProvider initialState={initialState}>
             <ErrorBoundary>
                 <App />
             </ErrorBoundary>

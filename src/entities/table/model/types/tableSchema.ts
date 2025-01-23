@@ -2,13 +2,13 @@ interface Row {
     id: string,
     selected: boolean,
     company: string,
-    adress: string
+    address: string
 }
 
 interface TableSchema {
     columns: string[];
     rows: Row[];
-    selected: string[];
+    selectedRows: string[];
 }
 
 export type {TableSchema, Row}

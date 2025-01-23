@@ -1,4 +1,4 @@
 import { tableReducer } from "./model/slice/tableSlice";
-import { TableSchema } from "./model/types/tableSchema";
+import { TableSchema, Row } from "./model/types/tableSchema";
 export {tableReducer}
-export type {TableSchema}
+export type {TableSchema, Row}

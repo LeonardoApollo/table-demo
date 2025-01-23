@@ -1,3 +1,3 @@
 import { StateSchema } from '@app/providers/StoreProvider';
 
-export const getSelectedRows = (state: StateSchema) => state.table.rows;
+export const getRows = (state: StateSchema) => state.table.rows;
