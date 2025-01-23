@@ -1,5 +1,5 @@
 import { Row } from '@entities/Table';
-import { Input, Portal } from '@shared/ui';
+import { Button, Input, Portal } from '@shared/ui';
 import React, {
   ChangeEvent,
   MouseEvent,
@@ -29,7 +29,7 @@ export const AddCompanyButton: React.FC<AddCompanyButtonProps> = memo(
   ({ onAddCompany }) => {
     const [modalState, setModalState] = useState<boolean>(false);
     const [formData, setFormData] = useState<FormState>(initiaFormState);
-    const wrapperRef = useRef<HTMLDivElement>(null);
+    const overlayRef = useRef<HTMLDivElement>(null);
 
     const handleOpenModal = () => setModalState(true);
     const handleCloseModal = () => setModalState(false);
@@ -55,7 +55,7 @@ export const AddCompanyButton: React.FC<AddCompanyButtonProps> = memo(
 
     const handleWrapperClick = (e: MouseEvent<HTMLDivElement>) => {
       e.stopPropagation();
-      if (e.target === wrapperRef.current) handleCloseModal();
+      if (e.target === overlayRef.current) handleCloseModal();
     };
 
     useEffect(() => {
@@ -68,33 +68,35 @@ export const AddCompanyButton: React.FC<AddCompanyButtonProps> = memo(
 
     return (
       <>
-        <button onClick={handleOpenModal}>Добавить компанию</button>
+        <Button onClick={handleOpenModal}>Добавить</Button>
         {modalState && (
           <Portal>
             <div
-              id="modal-wrapper"
-              ref={wrapperRef}
-              className={cls.Wrapper}
+              ref={overlayRef}
+              className={cls.overlay}
               onClick={handleWrapperClick}
             >
-              <div className={cls.Form}>
-                <div>
+              <div className={cls.modal}>
+                <div className={cls.title}>Создание новой компании</div>
+                <div className={cls.form}>
                   <label htmlFor="company">Введите название комапнии: </label>
                   <Input
                     id="company"
+                    className={cls.input}
                     value={formData.company}
                     onChange={handleFormChange('company')}
                   />
-                </div>
-                <div>
                   <label htmlFor="address">Введите адрес комапнии: </label>
                   <Input
                     id="address"
+                    className={cls.input}
                     value={formData.address}
                     onChange={handleFormChange('address')}
                   />
                 </div>
-                <button onClick={handleAddCompany}>Добавить компанию</button>
+                <div className={cls['button-container']}>
+                  <Button onClick={handleAddCompany}>Добавить компанию</Button>
+                </div>
               </div>
             </div>
           </Portal>

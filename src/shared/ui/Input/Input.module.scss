@@ -1,0 +1,9 @@
+.input {
+    background-color: transparent;
+    outline: none;
+    border: none;
+}
+
+.input:focus {
+    border-bottom: 1px solid black
+}

@@ -22,7 +22,7 @@ export const TableRow: React.FC<TableRowProps> = memo((props) => {
     onChangeAddress,
   } = props;
   return (
-    <tr className={selected ? cls.Selected : ''}>
+    <tr className={selected ? cls.selected : ''}>
       <td>
         <input
           type="checkbox"
@@ -31,18 +31,10 @@ export const TableRow: React.FC<TableRowProps> = memo((props) => {
         />
       </td>
       <td>
-        <Input
-          className={cls.Input}
-          value={company}
-          onChange={onChangeCompany(id)}
-        />
+        <Input value={company} onChange={onChangeCompany(id)} />
       </td>
       <td>
-        <Input
-          className={cls.Input}
-          value={address}
-          onChange={onChangeAddress(id)}
-        />
+        <Input value={address} onChange={onChangeAddress(id)} />
       </td>
     </tr>
   );

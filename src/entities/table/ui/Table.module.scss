@@ -1,13 +1,57 @@
-.Selected {
-    background-color: rgb(21, 148, 221, 0.5);
+table {
+    width: 100%; 
+    border-collapse: collapse;
 }
 
-.Input {
-    background-color: transparent;
-    outline: none;
-    border: none;
+thead {
+    display: table;
+    table-layout: fixed;
+    width: 100%;
 }
 
-.Input:focus {
-    outline: 1px solid black
+tbody {
+    display: block;
+    height: calc(100vh - 100px);
+    overflow-y: scroll; 
+}
+
+th, td {
+    padding: 14px; 
+    text-align: left; 
+}
+
+tr {
+    display: table; 
+    width: 100%;
+    table-layout: fixed; 
+    background-color: #ffffff;
+    border-bottom: 1px solid #e5e9ea;
+    cursor: pointer;
+}
+
+th {
+    background-color: #f9fbfc; 
+    color: #000;
+    font-weight: 700;
+    font-size: 16px;
+    border-bottom: 1px solid #d5d9df;
+}
+
+tr:hover {
+    background-color: #f8fafb; 
+}
+
+td {
+    vertical-align: top;  
+}
+
+tr {
+    &.selected {
+        background-color: #edf7ff;
+    }
+}
+
+.observer { 
+    height: 20px,;
+    width: 100%
 }
