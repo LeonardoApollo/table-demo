@@ -95,7 +95,12 @@ export const AddCompanyButton: React.FC<AddCompanyButtonProps> = memo(
                   />
                 </div>
                 <div className={cls['button-container']}>
-                  <Button onClick={handleAddCompany}>Добавить компанию</Button>
+                  <Button
+                    disabled={!(formData.address && formData.company)}
+                    onClick={handleAddCompany}
+                  >
+                    Добавить компанию
+                  </Button>
                 </div>
               </div>
             </div>

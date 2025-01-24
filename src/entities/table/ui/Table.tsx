@@ -1,5 +1,11 @@
 import { useAppDispatch } from '@shared/hooks/useAppDispatch';
-import React, { ChangeEvent, memo, useCallback, useEffect } from 'react';
+import React, {
+  ChangeEvent,
+  memo,
+  useCallback,
+  useEffect,
+  useRef,
+} from 'react';
 import { useSelector } from 'react-redux';
 
 import { getColumns } from '../model/selectors/getColumns';
@@ -20,6 +26,7 @@ export const Table: React.FC = memo(() => {
   const tableRows = useSelector(getRows);
   const tableColumns = useSelector(getColumns);
   const totalRows = tableRows.length;
+  const intersectionRef = useRef<HTMLTableRowElement>(null);
   const dispatch = useAppDispatch();
   const handleCheckboxChange = useCallback(
     (id: string) => () => {
@@ -52,7 +59,7 @@ export const Table: React.FC = memo(() => {
   };
 
   useEffect(() => {
-    const target = document.getElementById('load-more-target');
+    const target = intersectionRef.current;
     const observer = new IntersectionObserver((entries) => {
       if (entries[0].isIntersecting) {
         if (totalRows <= 40) {
@@ -110,7 +117,7 @@ export const Table: React.FC = memo(() => {
             onChangeAddress={handleChangeAddress}
           />
         ))}
-        <tr id="load-more-target">
+        <tr ref={intersectionRef}>
           <td>
             <div className={cls.observer} />
           </td>
